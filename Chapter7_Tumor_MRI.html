@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Tumors - MRI Complete Reference</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #495057;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --accent-color: #0d6efd;
+            --accent-hover: #0b5ed7;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffecb5;
+            --warning-text: #664d03;
+            --info-bg: #cff4fc;
+            --info-border: #b6effb;
+            --info-text: #055160;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --code-bg: #f1f3f5;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-tertiary: #0f3460;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b8b8b8;
+            --text-muted: #888888;
+            --border-color: #3d3d5c;
+            --accent-color: #4dabf7;
+            --accent-hover: #74c0fc;
+            --warning-bg: #332701;
+            --warning-border: #4d3a02;
+            --warning-text: #ffc107;
+            --info-bg: #032830;
+            --info-border: #055160;
+            --info-text: #6edff6;
+            --shadow: 0 2px 8px rgba(0,0,0,0.3);
+            --code-bg: #2d2d44;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            flex: 0 1 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 36px 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 18px;
+            display: none;
+        }
+
+        .search-results-count {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--border-color);
+        }
+
+        /* TOC Toggle (Mobile) */
+        .toc-toggle {
+            display: none;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Sidebar TOC */
+        .sidebar {
+            width: 280px;
+            height: calc(100vh - 60px);
+            position: sticky;
+            top: 60px;
+            overflow-y: auto;
+            padding: 16px;
+            border-right: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            flex-shrink: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .expand-all-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .expand-all-btn:hover {
+            background: var(--border-color);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-part {
+            margin-bottom: 16px;
+        }
+
+        .toc-part-title {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toc-part-title::before {
+            content: '▸';
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        .toc-part.expanded .toc-part-title::before {
+            transform: rotate(90deg);
+        }
+
+        .toc-sections {
+            display: none;
+            padding-left: 16px;
+        }
+
+        .toc-part.expanded .toc-sections {
+            display: block;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 4px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            padding-left: 8px;
+            margin-left: -8px;
+        }
+
+        .toc-link:hover {
+            color: var(--accent-color);
+        }
+
+        .toc-link.active {
+            color: var(--accent-color);
+            border-left-color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 24px 32px;
+            min-width: 0;
+        }
+
+        .chapter-header {
+            text-align: center;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 32px;
+        }
+
+        .chapter-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .chapter-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Parts */
+        .part {
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .part-header {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            padding: 14px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .part-header:hover {
+            filter: brightness(1.1);
+        }
+
+        .part-title {
+            font-size: 1.2rem;
+            color: white;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+
+        .part-toggle {
+            font-size: 1.4rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .part.collapsed .part-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .part-content {
+            padding: 20px;
+        }
+
+        .part.collapsed .part-content {
+            display: none;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-number {
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .section-toggle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        .section.expanded .section-toggle {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            display: none;
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section.expanded .section-content {
+            display: block;
+        }
+
+        /* Content Elements */
+        .subsection {
+            margin-bottom: 20px;
+        }
+
+        .subsection-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        ul, ol {
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        /* Special Boxes */
+        .warning-box {
+            background: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            border-left: 4px solid var(--warning-text);
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+
+        .warning-box .box-title {
+            font-weight: 600;
+            color: var(--warning-text);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box ul {
+            color: var(--warning-text);
+            margin-bottom: 0;
+        }
+
+        .info-box {
+            background: var(--info-bg);
+            border: 1px solid var(--info-border);
+            border-left: 4px solid var(--info-text);
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+
+        .info-box .box-title {
+            font-weight: 600;
+            color: var(--info-text);
+            margin-bottom: 8px;
+        }
+
+        .info-box ul, .info-box p {
+            color: var(--info-text);
+        }
+
+        /* Entity Cards */
+        .entity-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin: 12px 0;
+        }
+
+        .entity-name {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 6px;
+        }
+
+        .entity-detail {
+            display: flex;
+            gap: 8px;
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        .entity-label {
+            font-weight: 500;
+            min-width: 60px;
+            color: var(--text-muted);
+        }
+
+        /* Highlight for search */
+        mark {
+            background: #ffeb3b;
+            color: #000;
+            padding: 1px 2px;
+            border-radius: 2px;
+        }
+
+        [data-theme="dark"] mark {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar {
+                position: fixed;
+                left: -300px;
+                top: 60px;
+                height: calc(100vh - 60px);
+                z-index: 999;
+                transition: left 0.3s;
+                box-shadow: var(--shadow);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .toc-toggle {
+                display: block;
+            }
+
+            .main-content {
+                padding: 16px;
+            }
+
+            .chapter-header h1 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 10px 12px;
+            }
+
+            .header h1 {
+                font-size: 1rem;
+            }
+
+            .search-container {
+                flex: 1 1 100%;
+                order: 3;
+            }
+        }
+
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button class="toc-toggle" onclick="toggleSidebar()">☰ 目錄</button>
+        <h1>Ch.7 Tumors - MRI Reference</h1>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索關鍵字..." oninput="handleSearch()">
+            <button class="search-clear" id="searchClear" onclick="clearSearch()">×</button>
+            <div class="search-results-count" id="searchCount"></div>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">深色</span>
+        </button>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h2>目錄導航</h2>
+                <button class="expand-all-btn" onclick="toggleAllParts()" title="展開/收合全部">
+                    <span id="expandAllIcon">📖</span>
+                </button>
+            </div>
+            <nav class="toc-list">
+                <div class="toc-part expanded">
+                    <div class="toc-part-title" onclick="toggleTocPart(this)" data-target="part-1">Part I: General Principles</div>
+                    <div class="toc-sections">
+                        <a href="#section-1" class="toc-link">1. Staging of MSK Tumors</a>
+                        <a href="#section-2" class="toc-link">2. Principles of Imaging</a>
+                        <a href="#section-3" class="toc-link">3. MRI Features for Staging</a>
+                        <a href="#section-4" class="toc-link">4. Evaluation After Therapy</a>
+                        <a href="#section-5" class="toc-link">5. Standard Protocol</a>
+                    </div>
+                </div>
+                <div class="toc-part">
+                    <div class="toc-part-title" onclick="toggleTocPart(this)" data-target="part-2">Part II: Bone Lesions</div>
+                    <div class="toc-sections">
+                        <a href="#section-6" class="toc-link">6. Image Interpretation</a>
+                        <a href="#section-7" class="toc-link">7. High T1 Signal Lesions</a>
+                        <a href="#section-8" class="toc-link">8. Low T2 Signal Lesions</a>
+                        <a href="#section-9" class="toc-link">9. Fluid-Fluid Levels</a>
+                        <a href="#section-10" class="toc-link">10. Cartilaginous Tumors</a>
+                    </div>
+                </div>
+                <div class="toc-part">
+                    <div class="toc-part-title" onclick="toggleTocPart(this)" data-target="part-3">Part III: Soft Tissue Tumors</div>
+                    <div class="toc-sections">
+                        <a href="#section-11" class="toc-link">11. General Principles</a>
+                        <a href="#section-12" class="toc-link">12. High T1 Signal Masses</a>
+                        <a href="#section-13" class="toc-link">13. Low T2 Signal Masses</a>
+                        <a href="#section-14" class="toc-link">14. Cystic-Appearing Masses</a>
+                    </div>
+                </div>
+                <div class="toc-part">
+                    <div class="toc-part-title" onclick="toggleTocPart(this)" data-target="part-4">Part IV: Clinical Applications</div>
+                    <div class="toc-sections">
+                        <a href="#section-15" class="toc-link">15. Report Template</a>
+                        <a href="#section-16" class="toc-link">16. Diagnostic Pitfalls</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="chapter-header">
+                <h1>Chapter 7: Tumors</h1>
+                <p class="subtitle">MRI Complete Reference — Bone and Soft Tissue Tumors</p>
+            </div>
+
+            <!-- PART I: GENERAL PRINCIPLES -->
+            <div class="part" id="part-1">
+                <div class="part-header" onclick="togglePart(this)">
+                    <h2 class="part-title">Part I: General Principles</h2>
+                    <span class="part-toggle">▼</span>
+                </div>
+                <div class="part-content">
+
+                <!-- Section 1 -->
+                <div class="section expanded" id="section-1">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">1</span>
+                            Staging of Musculoskeletal Tumors
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="subsection">
+                            <h4 class="subsection-title">MRI Role in Tumor Work-up</h4>
+                            <ul>
+                                <li>Confirm lesion presence</li>
+                                <li>Allow specific diagnosis in some cases</li>
+                                <li>Define tumor extent (local staging)</li>
+                                <li>Guide biopsy planning</li>
+                                <li>Evaluate recurrence after therapy</li>
+                            </ul>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Three Components of Staging</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Component</th>
+                                        <th>Description</th>
+                                        <th>Values</th>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Grade (G)</strong></td>
+                                        <td>Metastatic Potential</td>
+                                        <td>G1 = Low grade<br>G2 = High grade<br><em>Determined by biopsy/histology</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Local Extent (T)</strong></td>
+                                        <td>Compartmental Involvement</td>
+                                        <td>T1 = Intracompartmental<br>T2 = Extracompartmental</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Metastases (M)</strong></td>
+                                        <td>Nodal/Distant Spread</td>
+                                        <td>M0 = No metastases<br>M1 = Metastases present</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Enneking Staging System</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Stage</th>
+                                        <th>Components</th>
+                                        <th>Prognosis</th>
+                                    </tr>
+                                    <tr>
+                                        <td>IA</td>
+                                        <td>G1 (Low) + T1 (Intracompartmental) + M0</td>
+                                        <td>Best</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IB</td>
+                                        <td>G1 (Low) + T2 (Extracompartmental) + M0</td>
+                                        <td>Good</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IIA</td>
+                                        <td>G2 (High) + T1 (Intracompartmental) + M0</td>
+                                        <td>Moderate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IIB</td>
+                                        <td>G2 (High) + T2 (Extracompartmental) + M0</td>
+                                        <td>Poor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>III</td>
+                                        <td>Any G + Any T + M1</td>
+                                        <td>Worst</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Extracompartmental Spread Mechanisms</h4>
+                            <ul>
+                                <li>Direct tumor invasion into adjacent compartment</li>
+                                <li>Contamination from fracture or hemorrhage</li>
+                                <li>Iatrogenic: unplanned resection or poorly planned biopsy</li>
+                                <li>Each joint is a distinct compartment — articular invasion changes stage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="section" id="section-2">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">2</span>
+                            Principles of Imaging
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="subsection">
+                            <h4 class="subsection-title">Bone Tumors — Imaging Modalities</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Modality</th>
+                                        <th>Strengths</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Radiographs (XR)</strong></td>
+                                        <td>FIRST LINE, MOST SPECIFIC</td>
+                                        <td>Essential even if MRI planned</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MRI</strong></td>
+                                        <td>Most SENSITIVE, Best for LOCAL STAGING</td>
+                                        <td>Appearance often nonspecific; MUST correlate with XR</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Bone Scan</strong></td>
+                                        <td>Localize abnormality, Screen multifocal disease</td>
+                                        <td>Can be negative with some lesions</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>CT</strong></td>
+                                        <td>Matrix characterization, Cortical destruction</td>
+                                        <td>Better for calcification than MRI</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Soft Tissue Tumors — Imaging</h4>
+                            <ul>
+                                <li>Radiographs still obtained first (may reveal bone involvement, calcifications)</li>
+                                <li>MRI often allows specific diagnosis based on characteristic appearance</li>
+                                <li>Even without specific diagnosis, MRI excellent for staging</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="section" id="section-3">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">3</span>
+                            Important MRI Features for Staging (Checklist)
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="table-wrapper">
+                            <table>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Best Sequences</th>
+                                    <th>Key Points</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Intraosseous Extent</strong></td>
+                                    <td>T1W + STIR/FS-T2W</td>
+                                    <td>STIR may overestimate (edema); T1 shows sharp contrast with fat</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Extraosseous Extent</strong></td>
+                                    <td>T2W/STIR</td>
+                                    <td>Edema: feathery margins, no mass effect</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Neurovascular</strong></td>
+                                    <td>T1W axial + T2W</td>
+                                    <td>Clear fat plane = no involvement</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Joint Invasion</strong></td>
+                                    <td>T1W + T2W</td>
+                                    <td>Each joint = separate compartment</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Skip Metastases</strong></td>
+                                    <td>Large FOV STIR</td>
+                                    <td>Non-contiguous foci in same bone</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Local Adenopathy</strong></td>
+                                    <td>T1W + T2W</td>
+                                    <td>Same poor prognosis as distant mets</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="box-title">📏 Measurement Reporting</div>
+                            <ul>
+                                <li>A 5-cm "cuff" of normal tissue beyond tumor margins is desired at surgery</li>
+                                <li>Provide exact measurements of intraosseous and extraosseous components</li>
+                                <li>Reference to osseous landmark (e.g., "X cm from medial femoral condyle articular surface")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="section" id="section-4">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">4</span>
+                            Evaluation of Tumor After Therapy
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="subsection">
+                            <h4 class="subsection-title">Post-Chemotherapy Assessment</h4>
+                            <ul>
+                                <li><strong>Responder:</strong> &lt;10% viable tumor cells → Good prognosis</li>
+                                <li><strong>Non-responder:</strong> &gt;10% viable tumor cells → Poor prognosis</li>
+                                <li>Determined at histology after resection</li>
+                            </ul>
+                            <div class="warning-box">
+                                <div class="box-title">⚠️ MRI Limitations</div>
+                                <ul>
+                                    <li>Changes in size, signal, or edema: NOT reliably predictive</li>
+                                    <li>Standard post-Gd T1W: Unreliable (both tumor AND reactive tissue enhance)</li>
+                                    <li>Dynamic enhancement: Residual tumor enhances faster than reactive tissue (technically challenging)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Post-Surgery/Radiation Assessment</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Finding</th>
+                                        <th>Interpretation</th>
+                                    </tr>
+                                    <tr>
+                                        <td>NO high T2/STIR signal</td>
+                                        <td>Strong predictor of NON-RECURRENCE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>High T2 signal + NO mass</td>
+                                        <td>Likely edema/hemorrhage, NOT tumor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Normal "Texture Sign"</td>
+                                        <td>Normal muscle architecture on T1W → Highly predictive of non-recurrence</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mass with peripheral-only enhancement</td>
+                                        <td>Seroma, lymphocele, or abscess</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Enhancing Mass</strong></td>
+                                        <td><strong>RECURRENCE LIKELY → Biopsy indicated</strong></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="section" id="section-5">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">5</span>
+                            How to Image Tumors — Standard Protocol
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="subsection">
+                            <h4 class="subsection-title">Technical Setup</h4>
+                            <ul>
+                                <li><strong>Position:</strong> Supine (standard); Prone rarely for sternum or comfort</li>
+                                <li><strong>Initial Sequence:</strong> Body coil, large FOV to ensure entire tumor identified</li>
+                                <li><strong>Detailed Imaging:</strong> Surface coil for higher resolution of margins, NV structures, joints</li>
+                                <li><strong>Skin Marker:</strong> Place over suspected mass; postop patients: image entire scar length</li>
+                            </ul>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Pulse Sequence Protocol</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Sequence</th>
+                                        <th>Plane</th>
+                                        <th>FOV</th>
+                                        <th>Purpose</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>STIR</td>
+                                        <td>Cor/Sag</td>
+                                        <td>Large</td>
+                                        <td>Initial survey; sensitive for tumor, edema, skip lesions</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>T1W</td>
+                                        <td>Cor/Sag</td>
+                                        <td>Large</td>
+                                        <td>Intraosseous extent; detect fat/hemorrhage</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>T1W</td>
+                                        <td>Axial</td>
+                                        <td>Small</td>
+                                        <td>Tumor margins, anatomy, NV relationship</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>STIR/FS-T2W</td>
+                                        <td>Axial</td>
+                                        <td>Small</td>
+                                        <td>Extraosseous extent, tissue characterization</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>T1W or FSE-T2W</td>
+                                        <td>Sag/Cor</td>
+                                        <td>Small</td>
+                                        <td>Longitudinal plane; articular involvement</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="warning-box">
+                            <div class="box-title">⚠️ FSE-T2W Pitfall</div>
+                            <p>Fat remains bright on FSE-T2W → may mask intramedullary lesions</p>
+                            <p><strong>ALWAYS use fat saturation with FSE-T2W sequences for tumor imaging</strong></p>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Contrast Enhancement Guidelines</h4>
+                            <ul>
+                                <li><strong>Standard tumor protocol:</strong> Gadolinium NOT routinely required</li>
+                                <li><strong>Cystic vs cystic-appearing solid:</strong> USE Gadolinium</li>
+                                <li><strong>Postoperative/postradiation follow-up:</strong> USE Gadolinium</li>
+                                <li><strong>Fat-sat post-Gd T1W:</strong> MUST obtain pre-contrast fat-sat T1W in SAME PLANE (to avoid pseudoenhancement)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- PART II: BONE LESIONS -->
+            <div class="part" id="part-2">
+                <div class="part-header" onclick="togglePart(this)">
+                    <h2 class="part-title">Part II: Bone Lesions</h2>
+                    <span class="part-toggle">▼</span>
+                </div>
+                <div class="part-content">
+
+                <!-- Section 6 -->
+                <div class="section" id="section-6">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">6</span>
+                            Approach to Image Interpretation
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="subsection">
+                            <h4 class="subsection-title">General Benign vs Malignant Features</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Typically Benign</th>
+                                        <th>Typically Malignant</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Margins</td>
+                                        <td>Smooth, well-defined</td>
+                                        <td>Irregular, ill-defined</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Signal</td>
+                                        <td>Homogeneous</td>
+                                        <td>Heterogeneous</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NV involvement</td>
+                                        <td>Absent</td>
+                                        <td>Present</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Edema</td>
+                                        <td>Minimal/absent</td>
+                                        <td>Associated edema</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="warning-box">
+                            <div class="box-title">⚠️ Critical Warning</div>
+                            <ul>
+                                <li>SIGNIFICANT OVERLAP between benign and malignant lesion appearances</li>
+                                <li>DANGEROUS to determine benign vs malignant based on MRI alone</li>
+                                <li>Standard post-Gd T1W NOT helpful for differentiating benign vs malignant</li>
+                                <li>Always correlate with radiographs — they provide the MOST SPECIFIC information</li>
+                            </ul>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Aggressive-Appearing Benign Lesions</h4>
+                            <p><em>These benign lesions can display very aggressive MRI appearance due to associated edema:</em></p>
+                            
+                            <div class="entity-card">
+                                <div class="entity-name">Osteoid Osteoma</div>
+                                <div class="entity-detail"><span class="entity-label">Location:</span> Cortical</div>
+                                <div class="entity-detail"><span class="entity-label">Key:</span> Focal tumor NIDUS within cortical/periosteal reaction</div>
+                                <div class="entity-detail"><span class="entity-label">Tip:</span> CT often better for nidus visualization</div>
+                            </div>
+
+                            <div class="entity-card">
+                                <div class="entity-name">Chondroblastoma</div>
+                                <div class="entity-detail"><span class="entity-label">Location:</span> EPIPHYSIS (skeletally immature patients)</div>
+                                <div class="entity-detail"><span class="entity-label">Key:</span> Striking edema extending to metaphysis and soft tissues</div>
+                            </div>
+
+                            <div class="entity-card">
+                                <div class="entity-name">Osteoblastoma</div>
+                                <div class="entity-detail"><span class="entity-label">Location:</span> Spine (posterior elements)</div>
+                                <div class="entity-detail"><span class="entity-label">Key:</span> Larger than osteoid osteoma (>2cm); expansile</div>
+                            </div>
+
+                            <div class="entity-card">
+                                <div class="entity-name">Eosinophilic Granuloma (LCH)</div>
+                                <div class="entity-detail"><span class="entity-label">Location:</span> Variable</div>
+                                <div class="entity-detail"><span class="entity-label">Key:</span> Langerhans cell histiocytosis; beveled edge on XR</div>
+                            </div>
+
+                            <div class="entity-card">
+                                <div class="entity-name">Stress Fracture</div>
+                                <div class="entity-detail"><span class="entity-label">Location:</span> Weight-bearing bones</div>
+                                <div class="entity-detail"><span class="entity-label">Key:</span> Linear fracture line within edema</div>
+                                <div class="entity-detail"><span class="entity-label">Follow-up:</span> XR in 2-3 weeks if unclear</div>
+                                <div class="warning-box" style="margin-top:8px;">
+                                    <p><strong>AVOID BIOPSY:</strong> immature osteoid may be mistaken for malignancy at histology</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 7 -->
+                <div class="section" id="section-7">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">7</span>
+                            Bone Lesions with High T1 Signal
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <p><strong>High T1 signal indicates FAT or specific tissue compositions:</strong></p>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Intraosseous Lipoma</div>
+                            <div class="entity-detail"><span class="entity-label">Location:</span> Calcaneus, proximal femur, humerus</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> HIGH (fat)</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Intermediate-High</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Predominant fat signal; may have central cystic change or calcification</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Hemangioma (Simple - Spine)</div>
+                            <div class="entity-detail"><span class="entity-label">Location:</span> SPINE (very common)</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> HIGH (fat content)</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> HIGH</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> "Polka-dot" appearance on axial; Aggressive type lacks fat</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Medullary Bone Infarct</div>
+                            <div class="entity-detail"><span class="entity-label">Location:</span> Distal femur, proximal tibia</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> HIGH (central fat preserved)</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Variable</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> SERPENTINE LOW signal margin on all sequences; "double-line sign" on T2</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Paget's Disease</div>
+                            <div class="entity-detail"><span class="entity-label">Location:</span> Pelvis, spine, skull, femur</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Variable (fat areas)</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Variable</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Cortical thickening, bone enlargement, coarse trabeculae; better on XR</div>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="box-title">🔍 Differentiating Lipoma vs Infarct</div>
+                            <ul>
+                                <li><strong>Lipoma:</strong> Well-defined, homogeneous fat signal, may have central calcification</li>
+                                <li><strong>Infarct:</strong> Geographic shape with SERPENTINE low-signal margin, central fat with heterogeneous foci</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 8 -->
+                <div class="section" id="section-8">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">8</span>
+                            Bone Lesions with Low T2 Signal
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <p><strong>Low T2 signal suggests sclerosis, calcification, matrix, fibrous tissue:</strong></p>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Sclerosis/Calcification/Matrix</div>
+                            <div class="entity-detail"><span class="entity-label">Examples:</span> Bone island (enostosis), osteoid matrix</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Extremely low T2; better characterized with XR/CT</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Xanthofibroma (NOF / Fibrous Cortical Defect)</div>
+                            <div class="entity-detail"><span class="entity-label">Population:</span> Adolescents/young adults</div>
+                            <div class="entity-detail"><span class="entity-label">MRI:</span> Intermediate-low T1, low-intermediate T2 (fibrous)</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Lobular contour, eccentric location, sclerotic margin</div>
+                            <div class="entity-detail"><span class="entity-label">Tip:</span> Easily diagnosed on radiographs</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Fibrous Dysplasia</div>
+                            <div class="entity-detail"><span class="entity-label">MRI:</span> No characteristic appearance — heterogeneous signal</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> May be high, low, or mixed T2 due to variable tissue</div>
+                            <div class="entity-detail"><span class="entity-label">Tip:</span> XR "ground glass" matrix often more diagnostic</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Primary Lymphoma of Bone</div>
+                            <div class="entity-detail"><span class="entity-label">Type:</span> B-cell lymphoma</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Often LOW T2 (fibrosis); appearance varies</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 9 -->
+                <div class="section" id="section-9">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">9</span>
+                            Fluid-Fluid Levels in Bone Lesions
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <p><strong>Fluid-fluid levels = stagnant blood products within cavernous spaces</strong></p>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Aneurysmal Bone Cyst (ABC) — Classic Appearance</div>
+                            <ul>
+                                <li>Expansile, lobular mass</li>
+                                <li>Multiple cyst-like collections with HIGH T2 signal</li>
+                                <li>Fluid-fluid levels within cavities</li>
+                                <li>Primary ABC: Non-enhancing spaces fill ENTIRE lesion</li>
+                            </ul>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Differential Diagnosis of Fluid-Fluid Levels</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Entity</th>
+                                        <th>Nature</th>
+                                        <th>Key Distinguishing Feature</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Primary ABC</td>
+                                        <td>Benign</td>
+                                        <td>Non-enhancing spaces fill ENTIRE lesion</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telangiectatic Osteosarcoma</td>
+                                        <td><strong>Malignant</strong></td>
+                                        <td>Associated solid mass component</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Giant Cell Tumor + Secondary ABC</td>
+                                        <td>Aggressive benign</td>
+                                        <td>Solid enhancing component present</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chondroblastoma</td>
+                                        <td>Benign</td>
+                                        <td>Epiphyseal location, skeletally immature</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fibrous Dysplasia</td>
+                                        <td>Benign</td>
+                                        <td>Ground-glass matrix on XR</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MFH of Bone</td>
+                                        <td><strong>Malignant</strong></td>
+                                        <td>Aggressive features, older patient</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="box-title">📊 Fluid-Fluid Level Rule of Thirds</div>
+                            <ul>
+                                <li><strong>&gt;2/3 of lesion = Usually BENIGN</strong> (often ABC)</li>
+                                <li><strong>&lt;1/3 of lesion = Consider MALIGNANCY</strong></li>
+                                <li>Presence of associated SOLID MASS → Biopsy required</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 10 -->
+                <div class="section" id="section-10">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">10</span>
+                            Cartilaginous Tumors
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="subsection">
+                            <h4 class="subsection-title">Enchondroma — Classic MRI Features</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Appearance</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Architecture</td>
+                                        <td>Multiple lobules (hyaline cartilage)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>T2 Signal</td>
+                                        <td>Homogeneously HIGH within lobules</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Internal Septa</td>
+                                        <td>Thin, LOW signal (fibrous)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Low Signal Foci</td>
+                                        <td>Stippled areas (calcified matrix)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Enhancement</td>
+                                        <td>"Rings and Arcs" pattern</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surrounding Marrow</td>
+                                        <td>NO surrounding edema (key benign feature)</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Features Suggesting Chondrosarcoma (vs Enchondroma)</h4>
+                            <ul>
+                                <li><strong>Deep endosteal scalloping (&gt;2/3 cortex):</strong> Suggestive of malignancy</li>
+                                <li><strong>Cortical destruction ± soft tissue mass:</strong> Highly concerning</li>
+                                <li><strong>Edema in adjacent marrow or soft tissues:</strong> Worrisome</li>
+                                <li><strong>Size &gt;5 cm:</strong> Larger lesions more likely malignant</li>
+                                <li><strong>Axial skeleton location:</strong> Higher risk than appendicular</li>
+                            </ul>
+                        </div>
+
+                        <div class="warning-box">
+                            <div class="box-title">⚠️ Cartilage Tumor Limitation</div>
+                            <p>Often DIFFICULT or IMPOSSIBLE to distinguish enchondroma from low-grade chondrosarcoma</p>
+                            <p>Same MRI appearance and enhancement pattern can be seen in both</p>
+                            <p>Clinical correlation and sometimes biopsy required</p>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Osteochondroma</div>
+                            <div class="entity-detail"><span class="entity-label">Epidemiology:</span> Most common benign bone tumor</div>
+                            <div class="entity-detail"><span class="entity-label">Diagnosis:</span> Usually on radiographs</div>
+                            <div class="entity-detail"><span class="entity-label">MRI shows:</span></div>
+                            <ul>
+                                <li>Continuity of lesion's medullary cavity and cortex with parent bone</li>
+                                <li>Marrow fat isointense with host bone</li>
+                                <li>HIGH T2 cartilage cap clearly visible</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="box-title">📏 Cartilage Cap Thickness</div>
+                            <p><strong>Cap &gt;2 cm thickness: SUSPICIOUS for malignant degeneration (chondrosarcoma)</strong></p>
+                            <p>MRI can also show complications: neurovascular impingement, bursal formation, fracture</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- PART III: SOFT TISSUE TUMORS -->
+            <div class="part" id="part-3">
+                <div class="part-header" onclick="togglePart(this)">
+                    <h2 class="part-title">Part III: Soft Tissue Tumors</h2>
+                    <span class="part-toggle">▼</span>
+                </div>
+                <div class="part-content">
+
+                <!-- Section 11 -->
+                <div class="section" id="section-11">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">11</span>
+                            General Principles
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li>Some soft tissue tumors can be diagnosed with certainty based on MRI signal</li>
+                            <li>LARGE OVERLAP in MRI appearance of benign and malignant masses</li>
+                            <li>For indeterminate masses: use patient age, location, and differential tables</li>
+                            <li><strong>MOST indeterminate soft tissue masses should be BIOPSIED</strong></li>
+                        </ul>
+
+                        <div class="info-box">
+                            <div class="box-title">📋 Differential Diagnosis Framework</div>
+                            <p>For nonspecific MRI appearance, differential includes:</p>
+                            <ul>
+                                <li>Top 3 benign tumors for given age and location</li>
+                                <li>Top 3 malignant tumors for given age and location</li>
+                                <li>Refer to distribution tables (Tables 7.2 and 7.3)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 12 -->
+                <div class="section" id="section-12">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">12</span>
+                            Soft Tissue Masses with High T1 Signal
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <p><strong>High T1 signal usually indicates: FAT or SUBACUTE BLOOD products</strong></p>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Lipoma (Benign)</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> HIGH (fat)</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Intermediate-High</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Parallels subcutaneous fat ALL sequences; thin curvilinear septa</div>
+                            <div class="entity-detail"><span class="entity-label">Morphology:</span> Well-circumscribed (superficial) or infiltrative (intramuscular)</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Atypical Lipoma / Well-Differentiated Liposarcoma</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Predominantly HIGH</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Variable</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Predominant fat with COARSE, THICKENED septa; scattered nonfatty tissue (low T1, high T2, enhancing)</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Myxoid Liposarcoma</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> LOW-Intermediate</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Very HIGH</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> May appear CYSTIC; gelatinous; often NO recognizable fat</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Hemangioma (Cavernous)</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Isointense to muscle + HIGH foci (fat)</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Very HIGH</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Lobular morphology; fat content; scattered LOW foci (phleboliths, thrombus)</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Arteriovenous Malformation</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Flow voids + fat</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Flow voids</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Large high-flow vessels = DARK flow voids; HIGH on GRE</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Hematoma (Subacute)</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> HIGH (methemoglobin)</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Variable</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Heterogeneous, laminated; chronic = hemosiderin rim (low signal)</div>
+                        </div>
+
+                        <div class="warning-box">
+                            <div class="box-title">⚠️ Hematoma vs Hemorrhagic Tumor</div>
+                            <ul>
+                                <li>Hemorrhagic neoplasm can be INDISTINGUISHABLE from traumatic hematoma</li>
+                                <li>ANY hematoma must be followed to resolution</li>
+                                <li>Gadolinium may show enhancing tumor mass, but organizing hematoma also enhances</li>
+                                <li>If questionable: image-guided BIOPSY</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="box-title">💡 Fat-Containing Lesion</div>
+                            <p>Gadolinium NOT necessary to diagnose fat-containing lesions (lipoma, atypical lipoma)</p>
+                            <p>Fat saturation sequences confirm lipomatous nature</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 13 -->
+                <div class="section" id="section-13">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">13</span>
+                            Soft Tissue Masses with Low T2 Signal
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="entity-card">
+                            <div class="entity-name">PVNS (Pigmented Villonodular Synovitis)</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Intermediate-Low</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> LOW (hemosiderin)</div>
+                            <div class="entity-detail"><span class="entity-label">Location:</span> Knee most common</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> GRE: Characteristic "BLOOMING" of hemosiderin</div>
+                            <div class="entity-detail"><span class="entity-label">DDx:</span> Chronic hemarthrosis, RA, TB arthritis, amyloidosis, gout</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Giant Cell Tumor of Tendon Sheath</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Intermediate-Low</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Heterogeneous, LOW foci</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> Extra-articular PVNS; hand/wrist most common; adjacent to tendon</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Fibrous Lesions</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Low-Intermediate</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Low-Intermediate</div>
+                            <div class="entity-detail"><span class="entity-label">Examples:</span> Plantar fibroma, Morton's neuroma, desmoid tumors</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Amyloid</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Low-Intermediate</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Low-Intermediate</div>
+                            <div class="entity-detail"><span class="entity-label">Location:</span> Hip/shoulder most common</div>
+                            <div class="entity-detail"><span class="entity-label">Association:</span> Renal dialysis</div>
+                        </div>
+
+                        <div class="entity-card">
+                            <div class="entity-name">Gout (Tophi)</div>
+                            <div class="entity-detail"><span class="entity-label">T1:</span> Low-Intermediate</div>
+                            <div class="entity-detail"><span class="entity-label">T2:</span> Low-Intermediate</div>
+                            <div class="entity-detail"><span class="entity-label">Key:</span> ± bone erosions; contains fibrous tissue, hemosiderin, or calcification</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 14 -->
+                <div class="section" id="section-14">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">14</span>
+                            Cystic-Appearing Soft Tissue Masses
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="subsection">
+                            <h4 class="subsection-title">True Cyst Features</h4>
+                            <ul>
+                                <li><strong>T1 Signal:</strong> Homogeneous LOW (hypointense to muscle)</li>
+                                <li><strong>T2 Signal:</strong> Diffusely HIGH</li>
+                                <li><strong>Internal Septa:</strong> Thin, low signal (common in ganglion)</li>
+                                <li><strong>Post-Gd Enhancement:</strong> Thin peripheral wall and septa only; NO central enhancement</li>
+                            </ul>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Differential Diagnosis</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <tr>
+                                        <th>Entity</th>
+                                        <th>Nature</th>
+                                        <th>Enhancement</th>
+                                        <th>Key Feature</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Ganglion/Synovial Cyst</td>
+                                        <td>Benign</td>
+                                        <td>Peripheral only</td>
+                                        <td>Typical locations (popliteal fossa, dorsal wrist)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Intramuscular Myxoma</td>
+                                        <td>Benign</td>
+                                        <td>Peripheral/septal; may have internal</td>
+                                        <td>Well-circumscribed; gelatinous</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Myxoid Liposarcoma</td>
+                                        <td><strong>Malignant</strong></td>
+                                        <td>Internal enhancement</td>
+                                        <td>Solid tumor with myxoid elements</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Myxoid Chondrosarcoma</td>
+                                        <td><strong>Malignant</strong></td>
+                                        <td>Internal enhancement</td>
+                                        <td>Myxoid matrix</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Synovial Sarcoma</td>
+                                        <td><strong>Malignant</strong></td>
+                                        <td>Diffuse internal</td>
+                                        <td>Often appears cystic; enhancement proves solid</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nerve Sheath Tumor</td>
+                                        <td>Usually benign</td>
+                                        <td>Diffuse</td>
+                                        <td>"Target sign"; split-fat sign; nerve entering/exiting</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="warning-box">
+                            <div class="box-title">⚠️ Cystic-Appearing Mass Algorithm</div>
+                            <ul>
+                                <li>If atypical location + absence of classic pure cyst features → USE GADOLINIUM</li>
+                                <li>Internal enhancement → Solid component present → Consider BIOPSY</li>
+                                <li>Even if cystic-appearing, atypical features warrant aspiration or biopsy</li>
+                            </ul>
+                        </div>
+
+                        <div class="subsection">
+                            <h4 class="subsection-title">Nerve Sheath Tumor Features</h4>
+                            <ul>
+                                <li><strong>Nerve Continuity:</strong> Tubular nerve entering and exiting mass</li>
+                                <li><strong>Split-Fat Sign:</strong> Peripheral rim of fat surrounding lesion</li>
+                                <li><strong>Internal Fascicles:</strong> Multiple small nerve fascicles within lesion on T2W</li>
+                                <li><strong>Target Sign:</strong> Higher signal periphery surrounding central lower signal on T2W</li>
+                                <li><strong>Enhancement:</strong> Diffuse enhancement after gadolinium</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- PART IV: CLINICAL APPLICATIONS -->
+            <div class="part" id="part-4">
+                <div class="part-header" onclick="togglePart(this)">
+                    <h2 class="part-title">Part IV: Clinical Applications</h2>
+                    <span class="part-toggle">▼</span>
+                </div>
+                <div class="part-content">
+
+                <!-- Section 15 -->
+                <div class="section" id="section-15">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">15</span>
+                            Structured Report Template for Tumor MRI
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <ol>
+                            <li><strong>LESION IDENTIFICATION</strong>
+                                <ul>
+                                    <li>Location (bone vs soft tissue, anatomic site)</li>
+                                    <li>Size (3 dimensions)</li>
+                                </ul>
+                            </li>
+                            <li><strong>SIGNAL CHARACTERISTICS</strong>
+                                <ul>
+                                    <li>T1 signal (compared to muscle)</li>
+                                    <li>T2/STIR signal</li>
+                                    <li>Homogeneity</li>
+                                    <li>Fat content</li>
+                                    <li>Calcification/matrix</li>
+                                </ul>
+                            </li>
+                            <li><strong>MARGINS</strong>
+                                <ul>
+                                    <li>Well-defined vs ill-defined</li>
+                                    <li>Capsule presence</li>
+                                </ul>
+                            </li>
+                            <li><strong>INTRAOSSEOUS EXTENT</strong>
+                                <ul>
+                                    <li>Longitudinal extent with landmark reference</li>
+                                    <li>Example: "X cm from medial femoral condyle articular surface"</li>
+                                </ul>
+                            </li>
+                            <li><strong>EXTRAOSSEOUS EXTENT</strong>
+                                <ul>
+                                    <li>Soft tissue mass dimensions</li>
+                                    <li>Compartment(s) involved</li>
+                                </ul>
+                            </li>
+                            <li><strong>NEUROVASCULAR STRUCTURES</strong>
+                                <ul>
+                                    <li>Specific vessels/nerves identified</li>
+                                    <li>Clear fat plane vs encasement</li>
+                                    <li>If equivocal, state explicitly</li>
+                                </ul>
+                            </li>
+                            <li><strong>JOINT INVOLVEMENT</strong>
+                                <ul>
+                                    <li>Distance from joint</li>
+                                    <li>Evidence of intra-articular extension</li>
+                                </ul>
+                            </li>
+                            <li><strong>SKIP LESIONS</strong>
+                                <ul>
+                                    <li>Additional foci in same bone (non-contiguous with primary)</li>
+                                </ul>
+                            </li>
+                            <li><strong>LYMPHADENOPATHY</strong>
+                                <ul>
+                                    <li>Local and regional nodes</li>
+                                </ul>
+                            </li>
+                            <li><strong>ENHANCEMENT PATTERN</strong> (if contrast given)
+                                <ul>
+                                    <li>Homogeneous vs heterogeneous</li>
+                                    <li>Solid vs cystic</li>
+                                </ul>
+                            </li>
+                            <li><strong>IMPRESSION</strong>
+                                <ul>
+                                    <li>Specific diagnosis if possible</li>
+                                    <li>Differential diagnosis</li>
+                                    <li>Staging summary</li>
+                                    <li>Recommendations</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Section 16 -->
+                <div class="section" id="section-16">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <span class="section-title">
+                            <span class="section-number">16</span>
+                            Summary of Diagnostic Pitfalls
+                        </span>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="table-wrapper">
+                            <table>
+                                <tr>
+                                    <th>Pitfall</th>
+                                    <th>Consequence</th>
+                                    <th>Prevention</th>
+                                </tr>
+                                <tr>
+                                    <td>Relying on MRI alone for bone tumor characterization</td>
+                                    <td>Misdiagnosis</td>
+                                    <td>ALWAYS correlate with radiographs</td>
+                                </tr>
+                                <tr>
+                                    <td>Aggressive-appearing benign lesions</td>
+                                    <td>Unnecessary aggressive treatment</td>
+                                    <td>Know osteoid osteoma, chondroblastoma, stress fracture, LCH</td>
+                                </tr>
+                                <tr>
+                                    <td>Assuming benign vs malignant based on MRI margins</td>
+                                    <td>Missed malignancy or over-treatment</td>
+                                    <td>Significant overlap exists; biopsy when uncertain</td>
+                                </tr>
+                                <tr>
+                                    <td>Overestimating tumor extent on STIR</td>
+                                    <td>Overcalling stage</td>
+                                    <td>Correlate with T1W; edema ≠ tumor</td>
+                                </tr>
+                                <tr>
+                                    <td>Missing masked intramedullary lesions on FSE-T2</td>
+                                    <td>Missed tumor</td>
+                                    <td>Use fat saturation with FSE-T2W</td>
+                                </tr>
+                                <tr>
+                                    <td>Pseudoenhancement</td>
+                                    <td>False positive enhancement</td>
+                                    <td>Obtain pre-contrast fat-sat T1W in SAME PLANE</td>
+                                </tr>
+                                <tr>
+                                    <td>Cystic-appearing malignancy</td>
+                                    <td>Missed sarcoma</td>
+                                    <td>Use Gd for atypical cystic masses</td>
+                                </tr>
+                                <tr>
+                                    <td>Not consulting anatomy atlas for NV structures</td>
+                                    <td>Missed encasement if structures obliterated</td>
+                                    <td>Always identify expected NV location</td>
+                                </tr>
+                                <tr>
+                                    <td>Biopsy of stress fracture</td>
+                                    <td>Histology may mimic malignancy</td>
+                                    <td>Follow with XR in 2-3 weeks instead</td>
+                                </tr>
+                                <tr>
+                                    <td>Confusing granulation tissue for recurrence</td>
+                                    <td>False positive for recurrence</td>
+                                    <td>Use texture sign; biopsy if uncertain</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <p>Source: MRI of the Musculoskeletal System (Thieme)</p>
+                <p>Chapter 7: Tumors, Pages 132-164</p>
+                <p>Authors: P. Lang, M. Vahlensieck, J. O. Johnston, H. K. Genant</p>
+            </footer>
+        </main>
+    </div>
+
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.textContent = '🌙';
+                text.textContent = '深色';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.textContent = '☀️';
+                text.textContent = '淺色';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('themeIcon').textContent = '☀️';
+            document.getElementById('themeText').textContent = '淺色';
+        }
+
+        // Sidebar Toggle (Mobile)
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.toc-toggle');
+            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // Part Toggle
+        function togglePart(el) {
+            el.parentElement.classList.toggle('collapsed');
+        }
+
+        // Toggle All Parts
+        let allExpanded = true;
+        function toggleAllParts() {
+            const parts = document.querySelectorAll('.part');
+            const sections = document.querySelectorAll('.section');
+            const tocParts = document.querySelectorAll('.toc-part');
+            const icon = document.getElementById('expandAllIcon');
+            
+            if (allExpanded) {
+                // Collapse all
+                parts.forEach(p => p.classList.add('collapsed'));
+                sections.forEach(s => s.classList.remove('expanded'));
+                tocParts.forEach(t => t.classList.remove('expanded'));
+                icon.textContent = '📕';
+                allExpanded = false;
+            } else {
+                // Expand all
+                parts.forEach(p => p.classList.remove('collapsed'));
+                sections.forEach(s => s.classList.add('expanded'));
+                tocParts.forEach(t => t.classList.add('expanded'));
+                icon.textContent = '📖';
+                allExpanded = true;
+            }
+        }
+
+        // TOC Part Toggle (left sidebar) - also controls right side
+        function toggleTocPart(el) {
+            el.parentElement.classList.toggle('expanded');
+            
+            // Sync with right side part
+            const targetId = el.getAttribute('data-target');
+            if (targetId) {
+                const targetPart = document.getElementById(targetId);
+                if (targetPart) {
+                    // If TOC is expanding, expand the part and scroll to it
+                    if (el.parentElement.classList.contains('expanded')) {
+                        targetPart.classList.remove('collapsed');
+                        targetPart.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }
+        }
+
+        // Section Toggle
+        function toggleSection(el) {
+            el.parentElement.classList.toggle('expanded');
+        }
+
+        // Expand All Sections (on page load, first section is expanded)
+        // Others are collapsed by default
+
+        // Search Functionality
+        let originalContent = {};
+        
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const clearBtn = document.getElementById('searchClear');
+            const countDiv = document.getElementById('searchCount');
+            
+            clearBtn.style.display = query ? 'block' : 'none';
+            
+            // Reset previous highlights
+            document.querySelectorAll('mark').forEach(mark => {
+                const parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize();
+            });
+            
+            if (!query) {
+                countDiv.textContent = '';
+                return;
+            }
+            
+            // Expand all sections for search
+            document.querySelectorAll('.section').forEach(s => s.classList.add('expanded'));
+            
+            // Highlight matches
+            let count = 0;
+            const walker = document.createTreeWalker(
+                document.querySelector('.main-content'),
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const nodesToHighlight = [];
+            while (walker.nextNode()) {
+                const node = walker.currentNode;
+                if (node.nodeValue.toLowerCase().includes(query)) {
+                    nodesToHighlight.push(node);
+                }
+            }
+            
+            nodesToHighlight.forEach(node => {
+                const text = node.nodeValue;
+                const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+                const parts = text.split(regex);
+                
+                if (parts.length > 1) {
+                    const fragment = document.createDocumentFragment();
+                    parts.forEach(part => {
+                        if (part.toLowerCase() === query.toLowerCase()) {
+                            const mark = document.createElement('mark');
+                            mark.textContent = part;
+                            fragment.appendChild(mark);
+                            count++;
+                        } else {
+                            fragment.appendChild(document.createTextNode(part));
+                        }
+                    });
+                    node.parentNode.replaceChild(fragment, node);
+                }
+            });
+            
+            countDiv.textContent = count > 0 ? `找到 ${count} 個結果` : '沒有找到結果';
+            
+            // Scroll to first match
+            const firstMark = document.querySelector('mark');
+            if (firstMark) {
+                firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+        
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            handleSearch();
+        }
+
+        // TOC Active State
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('.section');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100) {
+                    current = section.id;
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top button
+            const scrollBtn = document.getElementById('scrollTop');
+            if (window.scrollY > 500) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                
+                // Expand the section
+                target.classList.add('expanded');
+                
+                // Scroll to it
+                target.scrollIntoView({ behavior: 'smooth' });
+                
+                // Close mobile sidebar
+                document.getElementById('sidebar').classList.remove('open');
+            });
+        });
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Keyboard shortcut for search
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                // Don't prevent default - let browser search also work
+                // But focus our search
+                document.getElementById('searchInput').focus();
+            }
+            if (e.key === 'Escape') {
+                clearSearch();
+            }
+        });
+    </script>
+</body>
+</html>

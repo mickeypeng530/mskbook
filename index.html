@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSK MRI Reference - Chapter Index</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #495057;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --accent-color: #0d6efd;
+            --accent-hover: #0b5ed7;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-card: #1f2940;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b8b8b8;
+            --text-muted: #888888;
+            --border-color: #3d3d5c;
+            --accent-color: #4dabf7;
+            --accent-hover: #74c0fc;
+            --success-color: #51cf66;
+            --warning-color: #fcc419;
+            --shadow: 0 4px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #2b6cb0 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        [data-theme="dark"] .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .header .authors {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 12px;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Search */
+        .search-container {
+            max-width: 600px;
+            margin: 24px auto;
+            padding: 0 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 32px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-count {
+            background: var(--bg-secondary);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Chapter Grid */
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* Chapter Card */
+        .chapter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .chapter-card.available {
+            cursor: pointer;
+        }
+
+        .chapter-card.coming-soon {
+            opacity: 0.6;
+        }
+
+        .card-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+        }
+
+        .chapter-card.coming-soon .card-header {
+            background: linear-gradient(135deg, #6c757d, #868e96);
+        }
+
+        .chapter-number {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        .chapter-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 16px 20px;
+        }
+
+        .chapter-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .chapter-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-footer {
+            padding: 12px 20px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-badge.ready {
+            background: rgba(25, 135, 84, 0.15);
+            color: var(--success-color);
+        }
+
+        .status-badge.coming {
+            background: rgba(108, 117, 125, 0.15);
+            color: var(--text-muted);
+        }
+
+        .view-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .view-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .quick-link {
+            background: var(--bg-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .quick-link:hover {
+            background: var(--border-color);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .stats-bar {
+                gap: 24px;
+            }
+
+            .stat-value {
+                font-size: 1.4rem;
+            }
+
+            .chapter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 8px 10px;
+            }
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">深色</span>
+        </button>
+        <h1>MSK MRI Reference</h1>
+        <p class="subtitle">MRI of the Musculoskeletal System (Thieme)</p>
+        <p class="authors">P. Lang, M. Vahlensieck, J. O. Johnston, H. K. Genant</p>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value" id="totalChapters">2</div>
+            <div class="stat-label">已完成章節</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="totalSections">32</div>
+            <div class="stat-label">主題數</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">16</div>
+            <div class="stat-label">診斷 Pitfalls</div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="搜尋章節或關鍵字..." oninput="filterChapters()">
+    </div>
+
+    <div class="container">
+        <!-- Completed Chapters -->
+        <div class="section-header">
+            <span class="section-icon">📚</span>
+            <h2 class="section-title">已完成章節</h2>
+            <span class="section-count" id="readyCount">2 章</span>
+        </div>
+
+        <div class="chapter-grid" id="readyChapters">
+            <!-- Chapter 7 -->
+            <div class="chapter-card available" onclick="openChapter('Chapter7_Tumor_MRI.html')" data-keywords="tumor tumors bone soft tissue staging enneking malignant benign lipoma sarcoma enchondroma chondrosarcoma osteosarcoma pvns">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 7</div>
+                    <div class="chapter-title">Tumors</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Bone and Soft Tissue Tumors — MRI characteristics, staging principles, and differential diagnosis.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 pp. 132-164</span>
+                        <span class="meta-item">📑 16 sections</span>
+                    </div>
+                    <div class="quick-links">
+                        <a href="Chapter7_Tumor_MRI.html#section-1" class="quick-link">Staging</a>
+                        <a href="Chapter7_Tumor_MRI.html#section-6" class="quick-link">Bone Lesions</a>
+                        <a href="Chapter7_Tumor_MRI.html#section-11" class="quick-link">Soft Tissue</a>
+                        <a href="Chapter7_Tumor_MRI.html#section-16" class="quick-link">Pitfalls</a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge ready">✓ Ready</span>
+                    <button class="view-btn">查看 →</button>
+                </div>
+            </div>
+
+            <!-- Chapter 12 -->
+            <div class="chapter-card available" onclick="openChapter('Chapter12_BoneSoftTissueTumor_MRI.html')" data-keywords="tumor bone soft tissue staging enneking protocol ucsf chemotherapy response metastases skip lesion neurovascular">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 12</div>
+                    <div class="chapter-title">Bone and Soft-Tissue Tumors</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Advanced tumor imaging — UCSF protocol, response monitoring, specific tumor entities.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 pp. 309-348</span>
+                        <span class="meta-item">📑 16 sections</span>
+                    </div>
+                    <div class="quick-links">
+                        <a href="Chapter12_BoneSoftTissueTumor_MRI.html#section-1" class="quick-link">Protocol</a>
+                        <a href="Chapter12_BoneSoftTissueTumor_MRI.html#section-6" class="quick-link">Staging</a>
+                        <a href="Chapter12_BoneSoftTissueTumor_MRI.html#section-10" class="quick-link">Chemo Response</a>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge ready">✓ Ready</span>
+                    <button class="view-btn">查看 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Chapters -->
+        <div class="section-header">
+            <span class="section-icon">📋</span>
+            <h2 class="section-title">待整理章節</h2>
+            <span class="section-count" id="comingCount">12 章</span>
+        </div>
+
+        <div class="chapter-grid" id="comingChapters">
+            <!-- Placeholder chapters based on typical MSK MRI textbook structure -->
+            <div class="chapter-card coming-soon" data-keywords="shoulder rotator cuff labrum instability biceps acromion">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 3</div>
+                    <div class="chapter-title">Shoulder</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Rotator cuff, labrum, instability, and biceps pathology.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="elbow lateral epicondylitis ucl bicep tricep">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 4</div>
+                    <div class="chapter-title">Elbow</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Lateral/medial epicondylitis, UCL, and tendon injuries.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="wrist hand carpal tunnel tfcc scapholunate">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 5</div>
+                    <div class="chapter-title">Wrist and Hand</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">TFCC, carpal ligaments, and hand pathology.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="hip labrum fai impingement avascular necrosis avn">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 6</div>
+                    <div class="chapter-title">Hip</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Labral tears, FAI, AVN, and hip arthroplasty.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="knee acl pcl meniscus mcl lcl cartilage">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 8</div>
+                    <div class="chapter-title">Knee</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Cruciate and collateral ligaments, meniscus, and cartilage.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="ankle foot achilles plantar fascia ligament syndesmosis">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 9</div>
+                    <div class="chapter-title">Ankle and Foot</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Achilles, ankle ligaments, and plantar structures.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="spine disc herniation stenosis nerve root cord">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 10</div>
+                    <div class="chapter-title">Spine</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Disc disease, stenosis, and spinal cord pathology.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="arthritis rheumatoid osteoarthritis gout inflammatory">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 11</div>
+                    <div class="chapter-title">Arthritis</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Inflammatory and degenerative arthropathies.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="infection osteomyelitis septic arthritis abscess">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 13</div>
+                    <div class="chapter-title">Infection</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Osteomyelitis, septic arthritis, and soft tissue infections.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="marrow bone edema red yellow conversion">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 14</div>
+                    <div class="chapter-title">Bone Marrow</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Marrow disorders, conversion patterns, and edema.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="trauma fracture stress avulsion contusion">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 15</div>
+                    <div class="chapter-title">Trauma</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Fractures, stress injuries, and traumatic soft tissue injuries.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="chapter-card coming-soon" data-keywords="muscle injury strain myopathy denervation">
+                <div class="card-header">
+                    <div class="chapter-number">Chapter 16</div>
+                    <div class="chapter-title">Muscle</div>
+                </div>
+                <div class="card-body">
+                    <p class="chapter-description">Muscle injuries, myopathies, and denervation.</p>
+                    <div class="chapter-meta">
+                        <span class="meta-item">📄 TBD</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge coming">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Results Message -->
+        <div class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <p>找不到符合的章節</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Source: MRI of the Musculoskeletal System (Thieme)</p>
+        <p>Authors: P. Lang, M. Vahlensieck, J. O. Johnston, H. K. Genant</p>
+        <p style="margin-top: 12px;">Last updated: <span id="lastUpdate"></span></p>
+    </footer>
+
+    <script>
+        // Set last update date
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('zh-TW', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.textContent = '🌙';
+                text.textContent = '深色';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.textContent = '☀️';
+                text.textContent = '淺色';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('themeIcon').textContent = '☀️';
+            document.getElementById('themeText').textContent = '淺色';
+        }
+
+        // Open Chapter
+        function openChapter(url) {
+            window.location.href = url;
+        }
+
+        // Search / Filter
+        function filterChapters() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const allCards = document.querySelectorAll('.chapter-card');
+            let readyVisible = 0;
+            let comingVisible = 0;
+
+            allCards.forEach(card => {
+                const title = card.querySelector('.chapter-title').textContent.toLowerCase();
+                const desc = card.querySelector('.chapter-description').textContent.toLowerCase();
+                const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+                const chapterNum = card.querySelector('.chapter-number').textContent.toLowerCase();
+
+                const matches = !query || 
+                    title.includes(query) || 
+                    desc.includes(query) || 
+                    keywords.includes(query) ||
+                    chapterNum.includes(query);
+
+                card.style.display = matches ? '' : 'none';
+
+                if (matches) {
+                    if (card.classList.contains('available')) {
+                        readyVisible++;
+                    } else {
+                        comingVisible++;
+                    }
+                }
+            });
+
+            // Update counts
+            document.getElementById('readyCount').textContent = readyVisible + ' 章';
+            document.getElementById('comingCount').textContent = comingVisible + ' 章';
+
+            // Show/hide no results
+            const noResults = document.getElementById('noResults');
+            const totalVisible = readyVisible + comingVisible;
+            noResults.style.display = totalVisible === 0 ? '' : 'none';
+
+            // Show/hide section headers
+            document.querySelector('#readyChapters').parentElement.querySelector('.section-header').style.display = 
+                readyVisible === 0 ? 'none' : '';
+            document.querySelector('#comingChapters').parentElement.querySelector('.section-header').style.display = 
+                comingVisible === 0 ? 'none' : '';
+        }
+
+        // Keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+    </script>
+</body>
+</html>
