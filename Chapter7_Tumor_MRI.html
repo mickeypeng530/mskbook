@@ -138,6 +138,21 @@
             background: var(--border-color);
         }
 
+        /* Back Link */
+        .back-link {
+            color: white;
+            background: rgba(255,255,255,0.15);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
         /* TOC Toggle (Mobile) */
         .toc-toggle {
             display: none;
@@ -159,19 +174,19 @@
 
         /* Sidebar TOC */
         .sidebar {
-            width: 280px;
+            width: 220px;
             height: calc(100vh - 60px);
             position: sticky;
             top: 60px;
             overflow-y: auto;
-            padding: 16px;
+            padding: 12px;
             border-right: 1px solid var(--border-color);
             background: var(--bg-secondary);
             flex-shrink: 0;
         }
 
         .sidebar h2 {
-            font-size: 14px;
+            font-size: 15px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--text-muted);
@@ -200,7 +215,7 @@
 
         .toc-part-title {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-secondary);
             padding: 6px 0;
             cursor: pointer;
@@ -221,7 +236,7 @@
 
         .toc-sections {
             display: none;
-            padding-left: 16px;
+            padding-left: 14px;
         }
 
         .toc-part.expanded .toc-sections {
@@ -230,8 +245,8 @@
 
         .toc-link {
             display: block;
-            padding: 4px 0;
-            font-size: 13px;
+            padding: 5px 0;
+            font-size: 14px;
             color: var(--text-secondary);
             text-decoration: none;
             border-left: 2px solid transparent;
@@ -523,8 +538,9 @@
         @media (max-width: 900px) {
             .sidebar {
                 position: fixed;
-                left: -300px;
+                left: -240px;
                 top: 60px;
+                width: 220px;
                 height: calc(100vh - 60px);
                 z-index: 999;
                 transition: left 0.3s;
@@ -589,7 +605,8 @@
 </head>
 <body>
     <header class="header">
-        <button class="toc-toggle" onclick="toggleSidebar()">☰ 目錄</button>
+        <a href="index.html" class="back-link" title="返回總目錄">← 目錄</a>
+        <button class="toc-toggle" onclick="toggleSidebar()">☰ 導航</button>
         <h1>Ch.7 Tumors - MRI Reference</h1>
         <div class="search-container">
             <input type="text" class="search-input" id="searchInput" placeholder="搜索關鍵字..." oninput="handleSearch()">
