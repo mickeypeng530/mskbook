@@ -1,5 +1,11 @@
 # Wiki Operation Log
 
+## [2026-04-06] ingest | Thieme Tumor Ch.7 + Ch.12 (merged)
+- Source: `raw/Chapter7_Tumor_MRI_Complete_Reference.txt` + `raw/Chapter12_BoneSoftTissueTumor_MRI_Complete_Reference.txt`
+- Pages created: [[bone-tumors]], [[soft-tissue-tumors]], [[thieme-tumor]]
+- Summary: Two tumor chapters merged — Enneking staging, signal-based approach (high T1/low T2/fluid-fluid/cystic), specific entities (osteosarcoma/Ewing/GCT/ABC/liposarcoma/PVNS/nerve sheath), metastases, chemo response (Pan classification), post-treatment evaluation, structured report template, 10 diagnostic pitfalls
+- Note: First multi-source ingest — content from both Thieme textbook chapters integrated into unified wiki pages
+
 ## [2026-04-06] ingest | MSK The Requisites - Chapter 12: Wrist & Hand
 - Source: `raw/MRI/12 wrist hand.pdf` (32 pages)
 - Pages created: [[intrinsic-ligaments]], [[tfcc]], [[tendons]], [[carpal-tunnel]], [[gamekeeper-thumb]], [[osseous]], [[tumors-masses]], [[requisites-wrist]]

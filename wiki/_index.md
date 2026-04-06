@@ -1,6 +1,6 @@
 # Radiology Wiki Index
 
-Last updated: 2026-04-06 | Total pages: 24
+Last updated: 2026-04-06 | Total pages: 27
 
 ## Shoulder
 - [[rotator-cuff]] — Anatomy, impingement, tears, Cofield/Goutallier/Bigliani
@@ -29,7 +29,12 @@ Last updated: 2026-04-06 | Total pages: 24
 - [[osseous]] — Ulnar variance, ulnolunate impaction, fractures, osteonecrosis (scaphoid/Kienböck)
 - [[tumors-masses]] — Ganglion cyst, GCT-TS, glomus tumor, enchondroma
 
+## Tumor (General)
+- [[bone-tumors]] — Signal-based approach, specific entities (osteosarcoma/Ewing/GCT/ABC), metastases
+- [[soft-tissue-tumors]] — Signal-based approach, specific entities (PVNS/nerve sheath/liposarcoma), pitfalls
+
 ## Sources
 - [[requisites-shoulder]] — MSK The Requisites Ch.10 Shoulder (50 pages)
 - [[requisites-knee]] — MSK The Requisites Ch.15 Knee (33 pages)
 - [[requisites-wrist]] — MSK The Requisites Ch.12 Wrist & Hand (32 pages)
+- [[thieme-tumor]] — Thieme Ch.7 + Ch.12 Tumors (merged, 65 pages)
