@@ -11,41 +11,31 @@ This wiki follows the **LLM Wiki pattern**: raw sources remain immutable, while 
 ```
 radiology-wiki/
 │
-├── raw/                              # Immutable source materials
-│   ├── textbooks/                    # PDF textbooks
-│   ├── papers/                       # Research papers
-│   ├── lectures/                     # Lecture PDFs (converted from slides)
-│   └── notes/                        # Existing notes to be processed
+├── raw/                              # Immutable source materials (user's own folder structure)
 │
 ├── wiki/                             # LLM-maintained knowledge base
 │   ├── index.md                      # Master index of all pages
 │   ├── log.md                        # Chronological operation log
 │   │
-│   ├── anatomy/                      # Anatomical structures
-│   │   ├── shoulder/
-│   │   ├── wrist/
-│   │   ├── elbow/
-│   │   ├── knee/
-│   │   ├── ankle/
-│   │   ├── hip/
-│   │   └── spine/
+│   ├── shoulder/                     # Topic-based: each file = anatomy + pathology + classification
+│   │   ├── rotator-cuff.md           # Includes Cofield, Goutallier, Bigliani, Neer
+│   │   ├── instability.md            # GH ligaments + Bankart variants + Hill-Sachs
+│   │   ├── labrum.md                 # Anatomy + normal variants
+│   │   ├── slap-lesion.md            # Types I-IV + paralabral cysts
+│   │   ├── biceps-long-head.md
+│   │   ├── rotator-interval.md       # Includes adhesive capsulitis
+│   │   ├── nerve-entrapment.md       # Suprascapular + quadrilateral + Parsonage-Turner
+│   │   └── shoulder-mri-protocol.md
 │   │
-│   ├── pathology/                    # Diseases and conditions
-│   │   ├── shoulder/
-│   │   ├── wrist/
-│   │   ├── elbow/
-│   │   ├── knee/
-│   │   ├── ankle/
-│   │   ├── hip/
-│   │   └── spine/
+│   ├── wrist/                        # (future)
+│   ├── elbow/                        # (future)
+│   ├── knee/                         # (future)
+│   ├── ankle/                        # (future)
+│   ├── hip/                          # (future)
+│   ├── spine/                        # (future)
 │   │
-│   ├── classification/               # Classification systems
-│   │
-│   ├── syndrome/                     # Clinical syndromes
-│   │
-│   ├── imaging/                      # Imaging protocols and techniques
-│   │
-│   ├── differential/                 # Differential diagnosis lists
+│   ├── _index/                       # Cross-cutting index pages
+│   │   └── classifications.md        # All classification systems by region
 │   │
 │   └── sources/                      # Source summaries
 │
@@ -53,6 +43,9 @@ radiology-wiki/
 │
 └── CLAUDE.md                         # This file
 ```
+
+### Organization Principle
+Each topic page combines **anatomy + pathology + classification** in one file. Classifications are embedded in their relevant topic page (e.g., Goutallier inside rotator-cuff.md) with a separate `_index/classifications.md` as a quick-lookup index. This mirrors clinical thinking: when reading about rotator cuff tears, you want Cofield/Goutallier right there, not in a separate folder.
 
 ## File Naming Conventions
 
@@ -73,184 +66,59 @@ Classification: [[goutallier-fatty-infiltration]]
 
 ## Page Templates
 
-### Pathology Page (`wiki/pathology/`)
+### Topic Page (`wiki/[region]/[topic].md`)
+
+Each topic page combines anatomy, pathology, and classification in one file:
 
 ```markdown
-# [Condition Name]
+# [Topic Name]
 
-## Definition
+## Anatomy
+- Structure, origin, insertion, innervation
+- MRI appearance by plane
+
+---
+
+## Pathology: [Condition Name]
+
+### Definition
 [Brief definition]
 
-## Mechanism / Etiology
+### Mechanism / Etiology
 - [Cause 1]
-- [Cause 2]
 
-## Classification
-[If applicable, or link to classification page]
-| Type | Description |
-|------|-------------|
-| I    | ...         |
-| II   | ...         |
+### Classification: [Name] {#anchor-id}
+| Grade/Type | Criteria | Significance |
+|------------|----------|-------------|
+| I          | ...      | ...         |
 
-## MRI Findings
+### MRI Findings
 - [Finding 1]
-- [Finding 2]
 
-## Associated Conditions
-- [[condition-1]] (percentage if known)
-- [[condition-2]]
+### Associated Conditions
+- [[related-topic]] (percentage if known)
 
-## Differential Diagnosis
-- [[ddx-1]]
-- [[ddx-2]]
+---
 
 ## Pitfalls
-- [Common mistake 1]
-- [Normal variant that mimics this]
+- [Common mistakes across all sections]
 
 ## Key Points
-- [Most important takeaway 1]
-- [Most important takeaway 2]
+- [Most important takeaways]
 
 ## References
 - Author et al. Journal. Year;Volume:Pages.
 ```
 
-### Classification Page (`wiki/classification/`)
-
-```markdown
-# [Classification Name]
-
-## Overview
-[What it classifies, why it matters]
-
-## Original Reference
-Author et al. Journal. Year;Volume:Pages.
-
-## Classification Table
-
-| Grade/Type | Criteria | Clinical Significance |
-|------------|----------|----------------------|
-| 0 / I      | ...      | ...                  |
-| 1 / II     | ...      | ...                  |
-
-## MRI Criteria
-[Specific imaging criteria for each grade]
-
-## Clinical Application
-- [When to use this classification]
-- [Treatment implications]
-
-## Pitfalls
-- [Common grading errors]
-
-## Related Classifications
-- [[related-classification]]
-
-## References
-- Original paper
-- Validation studies
-```
-
-### Anatomy Page (`wiki/anatomy/`)
-
-```markdown
-# [Structure Name]
-
-## Anatomy
-- **Origin**: 
-- **Insertion**: 
-- **Innervation**: 
-- **Blood supply**: 
-
-## Function
-[Biomechanical role]
-
-## MRI Appearance
-- **T1**: 
-- **T2/PD FS**: 
-- **Best plane**: 
-
-## Normal Variants
-- [Variant 1]
-- [Variant 2]
-
-## Common Pathology
-- [[pathology-1]]
-- [[pathology-2]]
-
-## Imaging Pitfalls
-- [Structure that mimics pathology]
-- [Magic angle effect, etc.]
-
-## References
-```
-
-### Syndrome Page (`wiki/syndrome/`)
-
-```markdown
-# [Syndrome Name]
-
-## Definition
-[What defines this syndrome]
-
-## Pathophysiology
-[Mechanism, biomechanics]
-
-## Components
-1. [[component-1]]
-2. [[component-2]]
-3. [[component-3]]
-
-## Clinical Presentation
-- [Symptom 1]
-- [Symptom 2]
-
-## MRI Findings
-| Structure | Finding |
-|-----------|---------|
-| ...       | ...     |
-
-## Phases / Stages
-[If applicable]
-
-## Treatment Implications
-[Brief overview]
-
-## References
-```
-
-### Imaging Protocol Page (`wiki/imaging/`)
+### Imaging Protocol Page (`wiki/[region]/[region]-mri-protocol.md`)
 
 ```markdown
 # [Body Part] MRI Protocol
 
-## Coil
-- [Coil type]
-
-## Patient Position
-- [Position details]
-
-## Sequences
-
-### Conventional MRI
-| Sequence | Plane | Purpose |
-|----------|-------|---------|
-| T1       | ...   | ...     |
-| T2 FS    | ...   | ...     |
-
-### MR Arthrography
-| Sequence | Plane | Purpose |
-|----------|-------|---------|
-| T1 FS    | ...   | ...     |
-
-## Key Structures to Evaluate
-- [ ] Structure 1
-- [ ] Structure 2
-
+## Coil / Patient Position
+## Sequences (tables for conventional + arthrography)
+## Key Structures to Evaluate (checklists by plane)
 ## Common Pitfalls
-- [Pitfall 1]
-
 ## References
 ```
 
