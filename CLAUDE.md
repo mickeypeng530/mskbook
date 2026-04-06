@@ -1,313 +1,150 @@
-# Radiology Wiki - Claude Code Schema
+# Radiology Wiki - Schema
 
-This document defines the structure, conventions, and workflows for maintaining a personal radiology knowledge base using LLM assistance.
+A personal MSK radiology knowledge base maintained by LLM, following the [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
 
-## Overview
+## Core Principles
 
-This wiki follows the **LLM Wiki pattern**: raw sources remain immutable, while the LLM incrementally builds and maintains a structured, interlinked collection of markdown files. The human curates sources and asks questions; the LLM handles summarizing, cross-referencing, and maintenance.
+1. **Raw sources are immutable** — originals stay untouched in `raw/`
+2. **Wiki is the compiled knowledge** — LLM writes and maintains all pages
+3. **Knowledge compounds** — each source integrates into existing pages, not isolated
+4. **Human curates, LLM maintains** — you decide what to ingest and ask questions; LLM handles organization, cross-referencing, and bookkeeping
 
 ## Directory Structure
 
 ```
 radiology-wiki/
-│
-├── raw/                              # Immutable source materials (user's own folder structure)
-│
-├── wiki/                             # LLM-maintained knowledge base
-│   ├── index.md                      # Master index of all pages
-│   ├── log.md                        # Chronological operation log
-│   │
-│   ├── shoulder/                     # Topic-based: each file = anatomy + pathology + classification
-│   │   ├── rotator-cuff.md           # Includes Cofield, Goutallier, Bigliani, Neer
-│   │   ├── instability.md            # GH ligaments + Bankart variants + Hill-Sachs
-│   │   ├── labrum.md                 # Anatomy + normal variants
-│   │   ├── slap-lesion.md            # Types I-IV + paralabral cysts
-│   │   ├── biceps-long-head.md
-│   │   ├── rotator-interval.md       # Includes adhesive capsulitis
-│   │   ├── nerve-entrapment.md       # Suprascapular + quadrilateral + Parsonage-Turner
-│   │   └── shoulder-mri-protocol.md
-│   │
-│   ├── wrist/                        # (future)
-│   ├── elbow/                        # (future)
-│   ├── knee/                         # (future)
-│   ├── ankle/                        # (future)
-│   ├── hip/                          # (future)
-│   ├── spine/                        # (future)
-│   │
-│   ├── _index/                       # Cross-cutting index pages
-│   │   └── classifications.md        # All classification systems by region
-│   │
-│   └── sources/                      # Source summaries
-│
-├── exports/                          # Generated HTML/PDF outputs
-│
-└── CLAUDE.md                         # This file
+├── raw/                    # Source materials being processed (temporary)
+├── wiki/                   # LLM-maintained knowledge base
+│   ├── _index.md           # Master index
+│   ├── _classifications.md # Quick reference to all classifications
+│   ├── _log.md             # Operation log
+│   ├── shoulder/           # Region folders
+│   │   ├── _overview.md    # Protocol, checklist for this region
+│   │   └── [topics].md     # Topic pages
+│   ├── wrist/
+│   ├── elbow/
+│   ├── knee/
+│   ├── ankle/
+│   ├── hip/
+│   ├── spine/
+│   └── sources/            # Source summaries
+└── CLAUDE.md               # This file
 ```
 
-### Organization Principle
-Each topic page combines **anatomy + pathology + classification** in one file. Classifications are embedded in their relevant topic page (e.g., Goutallier inside rotator-cuff.md) with a separate `_index/classifications.md` as a quick-lookup index. This mirrors clinical thinking: when reading about rotator cuff tears, you want Cofield/Goutallier right there, not in a separate folder.
+## Organization Principles
 
-## File Naming Conventions
+### By Region
+Knowledge is organized by body region because that's how radiologists think.
 
-- Use **kebab-case** for all filenames: `slap-lesion.md`, `rotator-cuff.md`
-- Use **lowercase** only
-- No spaces, use hyphens
-- Be specific: `goutallier-fatty-infiltration.md` not `goutallier.md`
+### Grouping
+Related knowledge stays together (anatomy + pathology + classification for a structure). Split into separate files only when content becomes too large.
 
-## Wiki Links
+### Flexibility
+- Not every region needs the same pages
+- Not every page needs the same sections
+- Let content determine structure
 
-Use Obsidian-style wiki links for cross-references:
+## Knowledge Structure
 
-```markdown
-See also: [[rotator-cuff]], [[slap-lesion]]
-Associated with [[bankart-lesion]] in 22% of cases.
-Classification: [[goutallier-fatty-infiltration]]
-```
+### Anatomy (for structures)
+Typical elements:
+- Components / Attachments
+- Function
+- Normal MRI appearance
+- Normal variants
 
-## Page Templates
+### Pathology (for conditions)
+Typical elements:
+- Mechanism / Etiology
+- Classification (if applicable)
+- MRI Findings (primary & secondary signs)
+- Associated conditions
+- Pitfalls / DDx
+- References
 
-### Topic Page (`wiki/[region]/[topic].md`)
+Not all elements are required — use what fits the content.
 
-Each topic page combines anatomy, pathology, and classification in one file:
+## Naming Conventions
 
-```markdown
-# [Topic Name]
-
-## Anatomy
-- Structure, origin, insertion, innervation
-- MRI appearance by plane
-
----
-
-## Pathology: [Condition Name]
-
-### Definition
-[Brief definition]
-
-### Mechanism / Etiology
-- [Cause 1]
-
-### Classification: [Name] {#anchor-id}
-| Grade/Type | Criteria | Significance |
-|------------|----------|-------------|
-| I          | ...      | ...         |
-
-### MRI Findings
-- [Finding 1]
-
-### Associated Conditions
-- [[related-topic]] (percentage if known)
-
----
-
-## Pitfalls
-- [Common mistakes across all sections]
-
-## Key Points
-- [Most important takeaways]
-
-## References
-- Author et al. Journal. Year;Volume:Pages.
-```
-
-### Imaging Protocol Page (`wiki/[region]/[region]-mri-protocol.md`)
-
-```markdown
-# [Body Part] MRI Protocol
-
-## Coil / Patient Position
-## Sequences (tables for conventional + arthrography)
-## Key Structures to Evaluate (checklists by plane)
-## Common Pitfalls
-## References
-```
-
-### Source Summary Page (`wiki/sources/`)
-
-```markdown
-# [Source Title]
-
-## Metadata
-- **Type**: Lecture / Paper / Textbook Chapter
-- **Date**: YYYY-MM-DD
-- **Author**: 
-- **Source file**: `raw/[path]/[filename]`
-
-## Summary
-[2-3 sentence overview]
-
-## Key Topics Covered
-- [[topic-1]]
-- [[topic-2]]
-
-## New Information Added
-- [What was learned from this source]
-
-## Pages Updated
-- [[page-1]] - added X
-- [[page-2]] - updated Y
-```
-
-## Special Files
-
-### index.md
-
-Master index organized by category:
-
-```markdown
-# Radiology Wiki Index
-
-Last updated: YYYY-MM-DD
-Total pages: [count]
-
-## Anatomy
-### Shoulder
-- [[rotator-cuff]] - Supraspinatus, infraspinatus, teres minor, subscapularis
-- [[labrum]] - Glenoid labrum anatomy and variants
-...
-
-## Pathology
-### Shoulder
-- [[slap-lesion]] - Superior labrum anterior to posterior tear
-- [[bankart-lesion]] - Anterior labral tear with/without bone
-...
-
-## Classifications
-- [[goutallier-fatty-infiltration]] - Muscle fatty degeneration grading
-- [[cofield-tear-size]] - Rotator cuff tear size classification
-...
-
-## Syndromes
-- [[throwing-shoulder]] - Overhead athlete shoulder complex
-...
-
-## Imaging Protocols
-- [[shoulder-mri-protocol]]
-- [[wrist-mri-protocol]]
-...
-```
-
-### log.md
-
-Chronological operation log:
-
-```markdown
-# Wiki Operation Log
-
-## [YYYY-MM-DD] ingest | Source Title
-- Processed: `raw/path/file.pdf`
-- Pages created: [[new-page]]
-- Pages updated: [[existing-page]]
-- Summary: [Brief description]
-
-## [YYYY-MM-DD] query | Question Asked
-- Question: "..."
-- Answer filed as: [[new-page]] (if applicable)
-
-## [YYYY-MM-DD] lint | Health Check
-- Orphan pages found: [[page]]
-- Missing links identified: [concept]
-- Contradictions: [description]
-```
+- **Filenames**: kebab-case, lowercase (`rotator-cuff.md`)
+- **Special files**: underscore prefix (`_index.md`, `_overview.md`)
+- **Wiki links**: shortest path unless ambiguous (`[[rotator-cuff]]`, not `[[shoulder/rotator-cuff]]`)
 
 ## Operations
 
-### 1. Ingest (Add New Source)
+### Ingest
+Add new source material to the wiki.
 
-When instructed to ingest a new source:
+1. Read source from `raw/`
+2. Discuss key content with user
+3. Update or create relevant wiki pages
+4. Add `[[wiki-links]]` to connect related content
+5. Update `_index.md` and `_classifications.md` if needed
+6. Log in `_log.md`
 
-1. **Read** the source file from `raw/`
-2. **Discuss** key takeaways with the user
-3. **Create** a source summary in `wiki/sources/`
-4. **Update or create** relevant wiki pages:
-   - Anatomy pages for new structures
-   - Pathology pages for conditions
-   - Classification pages for grading systems
-5. **Add wiki links** to connect related pages
-6. **Update** `index.md` with new pages
-7. **Log** the operation in `log.md`
+### Query
+Answer questions using wiki knowledge.
 
-Example command: `"Ingest raw/textbooks/shoulder-mri-chapter3.pdf"`
+1. Find relevant pages
+2. Synthesize answer with citations to wiki pages
+3. **Respond in Chinese, keep medical terms in English**
+4. Offer to file valuable answers as new content
 
-### 2. Query (Ask Questions)
+### Lint
+Health check the wiki.
 
-When answering questions:
+1. Find orphan pages (no inbound links)
+2. Find mentioned concepts without pages
+3. Find missing cross-references
+4. Suggest improvements
+5. Report and offer to fix
 
-1. **Read** `index.md` to find relevant pages
-2. **Read** the relevant wiki pages
-3. **Synthesize** an answer with citations to wiki pages
-4. **Offer** to file the answer as a new page if valuable
-5. **Respond in Chinese** while keeping medical terms in English
+## Special Files
 
-Example: `"What are the MRI findings of SLAP lesion?"`
+### _index.md
+Master index organized by region. Lists all pages with brief descriptions.
 
-### 3. Lint (Health Check)
+### _classifications.md
+Quick reference linking to classification sections across all pages.
+```markdown
+## Shoulder
+- **Cofield (tear size)** — [[rotator-cuff#Cofield]]
+- **Goutallier (fatty infiltration)** — [[rotator-cuff#Goutallier]]
 
-When instructed to lint:
-
-1. **Check** for orphan pages (no inbound links)
-2. **Identify** mentioned concepts without their own page
-3. **Find** contradictions between pages
-4. **Suggest** missing cross-references
-5. **Recommend** new sources to fill gaps
-6. **Report** findings and offer to fix issues
-
-Example command: `"Lint the wiki"` or `"Health check"`
-
-## Writing Style Guidelines
-
-### Language
-- **Wiki content**: English
-- **Explanations to user**: Chinese (Traditional)
-- **Medical terminology**: Always English, even in Chinese explanations
-
-### Formatting
-- Use tables for classifications and comparisons
-- Use bullet points for lists
-- Bold **key terms** on first mention
-- Keep paragraphs short (2-4 sentences)
-
-### Citations
-- Always include original references
-- Format: `Author et al. Journal. Year;Volume:Pages.`
-- Link to wiki pages when citing internal knowledge
-
-### Accuracy
-- Preserve exact percentages and measurements from sources
-- Note when data conflicts between sources
-- Mark uncertain information with [?] or "reportedly"
-
-## qmd Integration
-
-For searching across 250+ files, use qmd:
-
-```bash
-# Search the wiki
-qmd search "SLAP lesion MRI"
-qmd query "rotator cuff tear classification"
-
-# Get specific document
-qmd get "wiki/pathology/shoulder/slap-lesion.md"
+## Wrist
+- **Palmer (TFCC)** — [[tfcc#Palmer-Classification]]
 ```
+
+### _log.md
+Chronological record of operations.
+```markdown
+## [YYYY-MM-DD] ingest | Source Title
+- Pages updated: [[page1]], [[page2]]
+- Summary: [what was added]
+```
+
+### _overview.md (per region)
+Region-specific imaging protocol and systematic review checklist.
+
+## Language
+
+- **Wiki content**: English
+- **Responses to user**: Traditional Chinese (繁體中文)
+- **Medical terms**: Always English
 
 ## Git Workflow
 
 ```bash
-# After major changes
 git add .
-git commit -m "ingest: [source name]" 
-# or "update: [pages changed]"
-# or "lint: [fixes made]"
+git commit -m "ingest: [source]"  # or "update:", "lint:"
 git push
 ```
 
-## Quick Reference
+## Quick Commands
 
 | Task | Command |
 |------|---------|
-| Add new source | "Ingest raw/path/file.pdf" |
+| Add source | "Ingest [description]" |
 | Ask question | Just ask in Chinese |
-| Find information | "Search for [topic]" |
-| Health check | "Lint the wiki" |
-| Update index | "Rebuild index" |
-| View status | "Wiki status" |
+| Health check | "Lint" |
+| Rebuild index | "Rebuild index" |
