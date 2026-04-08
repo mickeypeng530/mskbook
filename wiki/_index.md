@@ -1,6 +1,6 @@
 # Radiology Wiki Index
 
-Last updated: 2026-04-06 | Total pages: 27
+Last updated: 2026-04-08 | Total pages: 36
 
 ## Shoulder
 - [[rotator-cuff]] — Anatomy, impingement, tears, Cofield/Goutallier/Bigliani
@@ -29,6 +29,16 @@ Last updated: 2026-04-06 | Total pages: 27
 - [[osseous]] — Ulnar variance, ulnolunate impaction, fractures, osteonecrosis (scaphoid/Kienböck)
 - [[tumors-masses]] — Ganglion cyst, GCT-TS, glomus tumor, enchondroma
 
+## Ankle & Foot
+- [[ankle/tendons]] — Achilles (Haglund's, xanthoma), medial (PTT tears/split, accessory navicular, FHL), lateral (peroneal split/dislocation), anterior
+- [[ankle/ligaments]] — Deltoid complex, spring ligament, lateral (ATFL/CFL/PTFL), syndesmosis
+- [[ankle/impingement]] — Anterolateral impingement, sinus tarsi syndrome, os trigonum (posterior)
+- [[ankle/plantar-fascia]] — Fasciitis (4mm threshold), rupture, Baxter's nerve entrapment
+- [[ankle/nerves]] — Tarsal tunnel syndrome, Morton's neuroma (low T2 key)
+- [[ankle/osseous]] — Tarsal coalition, OLT instability, Freiberg's, osteonecrosis, BMES
+- [[ankle/tumors-masses]] — Plantar fibromatosis, synovial sarcoma, accessory muscles
+- [[ankle/diabetic-foot]] — Osteomyelitis vs neuropathic arthropathy, marrow signal algorithm
+
 ## Tumor (General)
 - [[bone-tumors]] — Signal-based approach, specific entities (osteosarcoma/Ewing/GCT/ABC), metastases
 - [[soft-tissue-tumors]] — Signal-based approach, specific entities (PVNS/nerve sheath/liposarcoma), pitfalls
@@ -38,3 +48,4 @@ Last updated: 2026-04-06 | Total pages: 27
 - [[requisites-knee]] — MSK The Requisites Ch.15 Knee (33 pages)
 - [[requisites-wrist]] — MSK The Requisites Ch.12 Wrist & Hand (32 pages)
 - [[thieme-tumor]] — Thieme Ch.7 + Ch.12 Tumors (merged, 65 pages)
+- [[requisites-ankle]] — MSK The Requisites Ch.16 Foot & Ankle (49 pages)

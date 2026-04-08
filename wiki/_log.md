@@ -1,5 +1,10 @@
 # Wiki Operation Log
 
+## [2026-04-08] ingest | MSK The Requisites - Chapter 16: Foot & Ankle
+- Source: `raw/MRI/16 foot ankle.pdf` (49 pages)
+- Pages created: [[ankle/tendons]], [[ankle/ligaments]], [[ankle/impingement]], [[ankle/plantar-fascia]], [[ankle/nerves]], [[ankle/osseous]], [[ankle/tumors-masses]], [[ankle/diabetic-foot]], [[requisites-ankle]]
+- Summary: Complete foot & ankle MRI — Achilles (Haglund's, plantaris pitfall, xanthoma), medial tendons (PTT tears/split/accessory navicular, FHL communication pitfall), peroneals (split tear/dislocation/os peroneus), ligaments (deltoid/spring/lateral sequential tearing/syndesmosis), impingement (anterolateral/sinus tarsi/os trigonum), plantar fascia (4mm threshold/Baxter's nerve), nerves (tarsal tunnel/Morton's neuroma low T2), osseous (tarsal coalition middle facet/OLT instability signs/Freiberg's/BMES), tumors (plantar fibromatosis/synovial sarcoma/accessory muscles), diabetic foot (marrow signal algorithm/osteomyelitis vs neuropathic)
+
 ## [2026-04-06] ingest | Thieme Tumor Ch.7 + Ch.12 (merged)
 - Source: `raw/Chapter7_Tumor_MRI_Complete_Reference.txt` + `raw/Chapter12_BoneSoftTissueTumor_MRI_Complete_Reference.txt`
 - Pages created: [[bone-tumors]], [[soft-tissue-tumors]], [[thieme-tumor]]
